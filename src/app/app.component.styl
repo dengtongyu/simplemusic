@@ -1,0 +1,26 @@
+$norm=750;
+transformRem(v)
+    (v/$norm*10)rem
+
+.main {
+    height: 100%;
+}
+
+.search-btn {
+	//width: transformRem(40);
+	//height: transformRem(40);
+	position: absolute;
+	right: transformRem(40);
+	top: transformRem(50);
+	&>button {
+        width: transformRem(60);
+        height: transformRem(60);
+		//font-size: transformRem(26);
+		//padding: transformRem(10) transformRem(20);
+		color: #fff;
+		background-color: rgba(0, 0, 0, 0);
+        //font-size:transformRem(30);
+		//border: rgba(255, 255, 255, 0.6) solid transformRem(2);
+        border: none;
+	}
+}

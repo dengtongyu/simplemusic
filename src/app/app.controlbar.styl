@@ -1,0 +1,106 @@
+$norm=750;
+transformRem(v)
+    (v/$norm*10)rem
+
+$pos='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAYCAYAAAD+vg1LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMXSURBVEhL3ZTdS9NhFMftTS9CZE3BF6IXEIKoi7oLxIheILrYRaDuKoi6VNhVIvpf1FWxIBSDEG+C6kJZIIIgilCQLQqdL3vfz23OuX57Op/H5/dza2ldd+A7Dud8v9/n7DnPVvffxBGDY4LjgnpBgwE5NXoO768B6agAYcPS0tLVbDb7tFQqLdu2XQSSf6FGD47hojnwAMf0hN/v91iW9bxcLtvqgKAnBwQDgUAzGqOtMXdM630+n7dQKIQQ23ZZ7ezsqny+oLLZbQ1yavQI4X5Eg9Z4VJnrSQWNyWTy5Z6gqLa28ocCDiGaIFrjgZcOTuCeTk5MTHTLPdr5/I6yrNw/AS4atHgYLz01Hyzh1NraWrBY3FWZTNZFOp5S4cGAWrh8Ti1cOqtzapUcNGjxMF7amGfDSR25XO47xFRqy8Xyk4AKdTSp962NGuRfRwarOGjQ4mG88NSjNwnOF+XoZDIjd7aP6c529U4MKxGSWiUnlcrI1MVdPIwXnnqbbPVCLrddSiTSKh7fx9szLTXG1Co5iURGXkx+Gw/jhae+kxbBxVgsuQopFku5CN7srjF+cedGFWdPE/+Bh/HCc994fn5+kq+2uZlwMfZqVD3rvqbenG7WIH89Nl7FQbO4uDiJh/HSxu5V9Pf3P7asrA15YyOuEYlsqtHRcTU0NKxBTs3pw0UzMDDwCA/jpa/CXZ6ga25u7gMTrK/H5QnFDgUcuGjQGg93ee5zE1zxer2+cPjbJ5aIOBKJ/hH04ITD4c9o0BoP97m5PxBBp6DL4/H0zszMTKfTVjkaTcpk+weQy5IVvdnZ2VBbW5sfjdFW/UD4YHROahWwgOuC+z09PcNTU1PTq6uRqBj9lAmLKyuRDWp9fX0jcAwXDVo88NLGhPsnJGgXQGSKe4JewQPBQwNyavTgwOUKav6ECE6gwDYhcDpfjXtDfFtw1+CWqdGDAxcNWjzcaZ1wzDmVr8R9MQmb5hkxGSCnRg8OXGfSGlMnHHPuiSUg4vnwNnn4gJwaPThwDzWtDEiAZ4OQr4kJIKdGz+H9FnV1vwCJAvW00y66NwAAAABJRU5ErkJggg==';
+
+.pos {
+	background-image: url($pos);
+}
+
+.bottom-bar {
+	width: 100%;
+	height: transformRem(120);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 50;
+	&>.bom-bar-bg {
+		width: 100%;
+		height: 100%;
+		background: -o-linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
+		background: -ms-linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
+		background: -moz-linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
+		background: -webkit-linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
+		//background: linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
+
+	}
+	
+}
+
+.left-part {
+    float: left;
+	height: transformRem(70);
+	width: transformRem(540);
+	padding-left: transformRem(25);
+	padding-top: transformRem(25);
+    &>.progress-bar {
+		width: 100%;
+		height: transformRem(12);
+    	position: relative;
+    	cursor: pointer;
+    	background-color: #414141;
+    	border-radius: transformRem(6);
+    	&>.prog {
+    		height: 100%;
+    		position: absolute;
+    		left: 0;
+    		top: 0;
+    	}
+    	&>.load-prog {
+    		height: 100%;
+    		background-color: #535353;
+    		border-radius: transformRem(6);
+    	}
+    	&>.play-prog {
+    		background-color: #c70c0c;
+    		border-radius: transformRem(6);
+            width: 0;
+    		&>span {
+				width: transformRem(33);
+				height: transformRem(36);
+                float: right;
+                margin-top: transformRem(-11);
+                margin-right: transformRem(-16.5);
+				background-position: 0 0;
+				background-repeat: no-repeat;
+				display: block;
+				cursor: pointer;
+				background-size: cover;
+    		}
+    	}
+	}
+    &>.song-msg-bar {
+        width: 100%;
+		height: transformRem(58);
+		line-height: transformRem(76);
+		&>.music-name {
+			width: 65%;
+			color: #fff;
+			float: left;
+            text-align: left;
+		}
+		&>.music-time {
+			width: 35%;
+			float: right;
+			color: #797979;
+			text-align: right;
+			&>.ct {
+				color: #a1a1a1;
+			}
+		}
+    }
+}
+
+.right-part {
+    float: right;
+	height: transformRem(100);
+	width: transformRem(100);
+	padding-right: transformRem(25);
+	padding-top: transformRem(10);
+}
+
+.play-btn {
+    width: 100%;
+    height: 100%;
+}

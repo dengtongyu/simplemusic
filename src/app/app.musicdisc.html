@@ -1,0 +1,15 @@
+<div class="music-main">
+    <div class="bg-block">
+        <img class="blur" src="http://node.dengtongyu.com/res/images/default/default_img_600.png" [src]="songImg">
+    </div>
+    <div class="disc">
+        <div [class.rot-paused]="!isPlay" class="singer-img rotate rot-paused" [style.animationName]="rotateString"><img src="http://node.dengtongyu.com/res/images/default/default_img_600.png" [src]="songImg"></div>
+        <div class="disc-mask"></div>
+    </div>
+    <div class="needle-plus"></div>
+    <div class="song-lyrics">
+        <div id="lyrics-scroll" class="lyrics-scroll" [style.transform]="scollUpSize()">
+            <p *ngFor="let item of lyricsList; let i=index" [class.cur]="i==lightRowIndex">{{ item[1] }}</p>
+        </div>
+    </div>
+</div>

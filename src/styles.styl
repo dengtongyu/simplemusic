@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+@charset "UTF-8";
+/*全局样式*/
+*{margin:0; padding:0;}
+table{border-collapse:collapse; border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,var,i{font-style:normal; font-weight:normal;}
+ul,ol,li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+html {font-size: 62.5%}
+input,textarea {outline:none;resize:none;}
+pre,p{ white-space: -webkit-pre-wrap;white-space: -moz-pre-wrap; white-space: pre-wrap; word-wrap: break-word;}
+a,button {-webkit-tap-highlight-color: rgba(255, 255, 255, 0);-webkit-focus-ring-color: rgba(0, 0, 0, 0);outline: none;border: none;text-decoration:none;}
+a:hover{ }
+body {font-size:1.2rem;font-family:"Microsoft Yahei";color:#666;background-color: #fff}
+html,body{
+	height: 100%;
+}
+
+/*清除浮动*/
+.cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } 
+.cl { zoom: 1; }
+.clear {clear:both;display:inline;}
+
+/*显示隐藏*/
+.show{display:block;} 
+.hide{display:none;}
+
+/*左右浮动*/
+.fl,.z{float:left;}
+.fr,.y{float:right;}
+
+/*字体抗锯齿*/
+.thin {-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+
+/*单行文字超出显示省略号*/
+.ell {overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+
+/*遮罩*/
+.pop-mark {
+	width:100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	opacity: .4;
+	background-color: #000;
+}
+
+div {
+    /*width: 1rem; 
+    height: 0.4rem;*/
+    font-size: 12px; // 默认写上dpr为1的fontSize
+}
+
+[data-dpr="2"] div {
+    font-size: 24px;
+}
+
+[data-dpr="3"] div {
+    font-size: 36px;
+}
+
+	
