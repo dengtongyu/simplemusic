@@ -60,6 +60,7 @@ export class AppComponent {
     // if(this._music) {
     //   this._music.
     // }
+    this._music = document.querySelector('#music');
   }
 
   updateData() {
@@ -68,8 +69,7 @@ export class AppComponent {
     this.musicUrl = this._resData['play_url'];
 
     this.lyrics = this._resData['lyrics'];
-
-    this._music = document.querySelector('#music');
+    
     this._music.load();
 
     this.songName = this._resData['song_name'];
@@ -81,6 +81,11 @@ export class AppComponent {
 
   }
 
+  onCanPlay(event) {
+    console.log('可以播放了');
+    this.setPalayStatus(true);
+  }
+
   onTimeUpdate(event) {
     if(this.isPlay) {
       this.setMediaTime();
@@ -89,10 +94,12 @@ export class AppComponent {
 
   setPalayStatus(playStatus:boolean) {
     this.isPlay = playStatus;
+    
+    console.log('现在的播放状态：'+this.isPlay)
     if(this.isPlay) {
-      this._music.play();
+      this.audioPlay();
     }else {
-      this._music.pause();
+      this.audioPause()
     }
   }
 
@@ -149,5 +156,40 @@ export class AppComponent {
 
   showPopList() {
     this.isShowSearchPanel = true;
-  }  
+  } 
+
+  isWeixin(){ 
+    let ua = navigator.userAgent.toLowerCase(); 
+    if(ua.match(/MicroMessenger/i)) { 
+      return true; 
+    } else { 
+      return false; 
+    } 
+  }
+
+  audioPlay() {
+    let audio = this._music;
+    if(this.isWeixin()) {
+      
+      document.addEventListener("WeixinJSBridgeReady", function () {
+        console.log('hhhh')
+        audio.play();
+      }, false);
+    }else{
+      audio.load();
+      audio.play();
+    }
+  }
+
+  audioPause() {
+    let audio = this._music;
+    if(this.isWeixin()) {
+      document.addEventListener("WeixinJSBridgeReady", function () {
+        audio.pause();
+      }, false);
+    }else{
+      audio.pause();
+    }
+  }
+
 }

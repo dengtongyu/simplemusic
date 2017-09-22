@@ -1,9 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="main" style="text-align:center">
   
-  <audio id="music" style="display:none" preload="none" [src]="musicUrl" (timeupdate)="onTimeUpdate($event)">你的浏览器不支持audio标签。</audio>
+  <audio id="music" style="display:none" [src]="musicUrl" (timeupdate)="onTimeUpdate($event)" (canplay)="onCanPlay($event)">你的浏览器不支持audio标签。</audio>
 
-  <music-disc [songImg]="discImgUrl" [isPlay]="isPlay" [lyrics]="lyrics" [currentTime]="currentTime"></music-disc>
+  <music-disc [songImg]="discImgUrl" [isPlay]="isPlay" [lyrics]="lyrics" [currentTime]="currentTime" [hash]="hash"></music-disc>
 
   <div class="search-btn">
     <button (click)="showPopList()">
@@ -13,7 +13,7 @@
     </button>
   </div>
 
-  <control-bar [totalTime]="totalTime" [currentTime]="currentTime" [songName]="songName" [singer]="singer" [isPlay]="isPlay"  [hash]="hash" (playStatus)="setPalayStatus($event)"></control-bar>
+  <control-bar [totalTime]="totalTime" [currentTime]="currentTime" [songName]="songName" [singer]="singer" [isPlay]="isPlay" [hash]="hash" (playStatus)="setPalayStatus($event)"></control-bar>
 
   <search-panel [isShowSearchPanel]="isShowSearchPanel" [searchSongList]="searchSongList" (playSongHash)="setplaySongHash($event)" (closeSearchPanel)="closeSearchPanel($event)" (sendKeyWord)="getSearchKeyWord($event)"></search-panel>
 

@@ -23,7 +23,7 @@ $pos='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAYCAYAAAD+vg1LAAAAAXNS
 		background: -moz-linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
 		background: -webkit-linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
 		//background: linear-gradient(top , rgb(51, 51, 51) 28% , rgb(30, 30, 30) 68%);
-
+		display: flex;
 	}
 	
 }
@@ -31,9 +31,10 @@ $pos='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAYCAYAAAD+vg1LAAAAAXNS
 .left-part {
     float: left;
 	height: transformRem(70);
-	width: transformRem(540);
+	width: 70%;
 	padding-left: transformRem(25);
 	padding-top: transformRem(25);
+	flex: 1
     &>.progress-bar {
 		width: 100%;
 		height: transformRem(12);
@@ -96,8 +97,10 @@ $pos='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAYCAYAAAD+vg1LAAAAAXNS
     float: right;
 	height: transformRem(100);
 	width: transformRem(100);
+	padding-left: transformRem(25);
 	padding-right: transformRem(25);
 	padding-top: transformRem(10);
+	//box-sizing: border-box;
 }
 
 .play-btn {

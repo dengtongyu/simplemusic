@@ -11,6 +11,10 @@ export class MusicDisc {
   private _isPlay:boolean = false;//是否在播放;
   private _lyrics:string;
   private _currentTime:number = 0;
+  private _hash:string = '';
+  private _disc:Element;
+  private _img:Element;
+
   lyricsList:Array<any> = [];
   lightRowIndex:number = 0;//高亮行数
   scollIndex:number = 0;//滚动隐藏的行数
@@ -38,6 +42,16 @@ export class MusicDisc {
   set isPlay(status:boolean) {
     if(status == undefined) return;
     this._isPlay = status;
+
+    if(this._disc && this._img) {
+      let cTransform = getComputedStyle(this._disc).transform;
+      let iTransform = getComputedStyle(this._img).transform;
+      console.log(cTransform)
+      console.log(iTransform)
+      this._disc['style'].transform = cTransform === 'none'
+         ? iTransform
+         : iTransform.concat(' ', cTransform);
+    }
   }
 
   @Input() 
@@ -50,6 +64,20 @@ export class MusicDisc {
       return;
     }
     this._lyrics = text;
+  }
+
+  @Input() 
+  get hash():string {
+      return this._hash;
+  }
+  set hash(h:string) {
+      if(!h) {
+          this._hash = '';
+          return;
+      }
+      this._hash = h;
+
+      this._disc['style'] = '';
   }
 
   @Input() 
@@ -92,6 +120,9 @@ export class MusicDisc {
     this.rowDom = document.querySelector('#lyrics-scroll');
     //console.log(this.rowDom);
     this.ph = this.getRowheight();
+
+    this._disc = document.querySelector('.singer-img');
+    this._img = this._disc.querySelector('img');
   }
 
   initView() {
