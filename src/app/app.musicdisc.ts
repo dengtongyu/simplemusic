@@ -12,15 +12,15 @@ export class MusicDisc {
   private _lyrics:string;
   private _currentTime:number = 0;
   private _hash:string = '';
-  private _disc:Element;
-  private _img:Element;
+  //private _disc:Element;
+  //private _img:Element;
 
   lyricsList:Array<any> = [];
   lightRowIndex:number = 0;//高亮行数
   scollIndex:number = 0;//滚动隐藏的行数
   ph:number = 0;//每行的高度
   rowDom:any;
-  rotateString:string = 'stop';
+  defaultStatus:boolean = true;
   
   @Input() 
   get songImg():string {
@@ -42,16 +42,18 @@ export class MusicDisc {
   set isPlay(status:boolean) {
     if(status == undefined) return;
     this._isPlay = status;
+    
+    this.defaultStatus = false;
 
-    if(this._disc && this._img) {
-      let cTransform = getComputedStyle(this._disc).transform;
-      let iTransform = getComputedStyle(this._img).transform;
-      console.log(cTransform)
-      console.log(iTransform)
-      this._disc['style'].transform = cTransform === 'none'
-         ? iTransform
-         : iTransform.concat(' ', cTransform);
-    }
+    // if(this._disc && this._img) {
+    //   let cTransform = getComputedStyle(this._disc).transform;
+    //   let iTransform = getComputedStyle(this._img).transform;
+    //   console.log(cTransform)
+    //   console.log(iTransform)
+    //   this._disc['style'].transform = cTransform === 'none'
+    //      ? iTransform
+    //      : iTransform.concat(' ', cTransform);
+    // }
   }
 
   @Input() 
@@ -76,8 +78,7 @@ export class MusicDisc {
           return;
       }
       this._hash = h;
-
-      this._disc['style'] = '';
+      this.defaultStatus = true;
   }
 
   @Input() 
@@ -89,10 +90,6 @@ export class MusicDisc {
 
     if(this._currentTime == 0) {
       this.initView();
-    }else{
-      if(this.rotateString == 'stop') {
-        this.rotateString = 'rotate';
-      }
     }
   }
   
@@ -121,15 +118,14 @@ export class MusicDisc {
     //console.log(this.rowDom);
     this.ph = this.getRowheight();
 
-    this._disc = document.querySelector('.singer-img');
-    this._img = this._disc.querySelector('img');
+    //this._disc = document.querySelector('.singer-img');
+    //this._img = this._disc.querySelector('img');
   }
 
   initView() {
     this.lightRowIndex = 0;
     this.scollIndex = 0;
     this.ph = 0;
-    this.rotateString = 'stop';
   }
 
   positionLyric() {

@@ -3,7 +3,7 @@
         <img class="blur" src="http://node.dengtongyu.com/res/images/default/default_img_600.png" [src]="songImg">
     </div>
     <div class="disc">
-        <div class="singer-img"><img src="http://node.dengtongyu.com/res/images/default/default_img_600.png" [class.rotate]="isPlay" [src]="songImg"></div>
+        <div class="singer-img" [class.rot-play]="!defaultStatus && isPlay" [class.rotate]="!defaultStatus"><img src="http://node.dengtongyu.com/res/images/default/default_img_600.png" [src]="songImg"></div>
         <div class="disc-mask"></div>
     </div>
     <div class="needle-plus"></div>

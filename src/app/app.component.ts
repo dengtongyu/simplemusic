@@ -66,7 +66,7 @@ export class AppComponent {
   updateData() {
     this.discImgUrl = this._resData['img'];
 
-    this.musicUrl = this._resData['play_url'];
+    this.musicUrl = this._resData['play_url'].replace('http','https');
 
     this.lyrics = this._resData['lyrics'];
     
@@ -82,7 +82,7 @@ export class AppComponent {
   }
 
   onCanPlay(event) {
-    console.log('可以播放了');
+    //console.log('可以播放了');
     this.setPalayStatus(true);
   }
 
@@ -95,7 +95,7 @@ export class AppComponent {
   setPalayStatus(playStatus:boolean) {
     this.isPlay = playStatus;
     
-    console.log('现在的播放状态：'+this.isPlay)
+    //console.log('现在的播放状态：'+this.isPlay)
     if(this.isPlay) {
       this.audioPlay();
     }else {
@@ -170,13 +170,17 @@ export class AppComponent {
   audioPlay() {
     let audio = this._music;
     if(this.isWeixin()) {
-      
-      document.addEventListener("WeixinJSBridgeReady", function () {
-        console.log('hhhh')
+      //alert("这是微信浏览器");
+      wx.config({
+        // 配置信息
+      });
+      wx.ready(function () {
+        //console.log("微信浏览器准备好了")
         audio.play();
-      }, false);
+        //alert(audio.src);
+        //alert(audio.readyState);
+      });
     }else{
-      audio.load();
       audio.play();
     }
   }
@@ -184,9 +188,12 @@ export class AppComponent {
   audioPause() {
     let audio = this._music;
     if(this.isWeixin()) {
-      document.addEventListener("WeixinJSBridgeReady", function () {
+      wx.config({
+        // 配置信息
+      });
+      wx.ready(function () {
         audio.pause();
-      }, false);
+      });
     }else{
       audio.pause();
     }

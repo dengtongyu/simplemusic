@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="main" style="text-align:center">
   
-  <audio id="music" style="display:none" [src]="musicUrl" (timeupdate)="onTimeUpdate($event)" (canplay)="onCanPlay($event)">你的浏览器不支持audio标签。</audio>
+  <audio id="music" style="display:none" [src]="musicUrl" (timeupdate)="onTimeUpdate($event)" (canplaythrough)="onCanPlay($event)">你的浏览器不支持audio标签。</audio>
 
   <music-disc [songImg]="discImgUrl" [isPlay]="isPlay" [lyrics]="lyrics" [currentTime]="currentTime" [hash]="hash"></music-disc>
 
