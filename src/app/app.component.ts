@@ -20,7 +20,7 @@ export class AppComponent {
   
   isPlay:boolean = false;//播放状态
   
-  musicUrl:string = this._defaultImg;//歌曲媒体链接
+  musicUrl:string = 'http://game.163.com/weixin/gfxm3_gc/images/bg.mp3';//歌曲媒体链接
 
   discImgUrl:string;//歌曲图片
 
@@ -60,46 +60,57 @@ export class AppComponent {
     // if(this._music) {
     //   this._music.
     // }
-    this._music = document.querySelector('#music');
+    //this._music = document.querySelector('#music');
   }
 
   updateData() {
     this.discImgUrl = this._resData['img'];
 
-    this.musicUrl = this._resData['play_url'].replace('http','https');
-
     this.lyrics = this._resData['lyrics'];
     
-    this._music.load();
+    this.musicUrl = this._resData['play_url']//.replace('http','https');
 
     this.songName = this._resData['song_name'];
     this.singer = this._resData['author_name'];
 
     this.hash = this._resData['hash'];
 
+    this.newAudio(this.musicUrl);
+    
     this.setMediaTime();
 
   }
 
   onCanPlay(event) {
-    //console.log('可以播放了');
+    if(!this._music) return;
     this.setPalayStatus(true);
   }
 
   onTimeUpdate(event) {
+    if(!this._music) return;
     if(this.isPlay) {
       this.setMediaTime();
     }
   }
 
+  onError(event) {
+    if(!this._music) return;
+    console.log(this._music.error);
+  }
+
   setPalayStatus(playStatus:boolean) {
-    this.isPlay = playStatus;
-    
-    //console.log('现在的播放状态：'+this.isPlay)
-    if(this.isPlay) {
-      this.audioPlay();
+    if(!this._music.error) {
+      this.isPlay = playStatus;
+      
+      //console.log('现在的播放状态：'+this.isPlay)
+      if(this.isPlay) {
+        this.audioPlay();
+      }else {
+        this.audioPause()
+      }
     }else {
-      this.audioPause()
+      alert(this._music.error.code);
+      console.log(this._music.error);
     }
   }
 
@@ -149,6 +160,8 @@ export class AppComponent {
       if(data['result']) {
         this._resData = data['data'];
 
+        this.clearAudio();
+        
         this.updateData();
       }
     });
@@ -157,6 +170,24 @@ export class AppComponent {
   showPopList() {
     this.isShowSearchPanel = true;
   } 
+
+  newAudio(url:string) {
+    this._music = new Audio();
+    this._music.loop = 'loop';
+    this._music.src = url;
+    this._music.load();
+    this._music.addEventListener("timeupdate", ()=>{ this.onTimeUpdate(event) });
+    this._music.addEventListener("canplaythrough", ()=>{ this.onCanPlay(event) });
+    this._music.addEventListener("error", ()=>{ this.onError(event) });
+  }
+
+  clearAudio() {
+    if(!this._music) return;
+    this._music.removeEventListener("timeupdate",  ()=>{ this.onTimeUpdate(event) });
+    this._music.removeEventListener("canplaythrough", ()=>{ this.onCanPlay(event) });
+    this._music.removeEventListener("error", ()=>{ this.onError(event) });
+    this._music = null;
+  }
 
   isWeixin(){ 
     let ua = navigator.userAgent.toLowerCase(); 
@@ -175,8 +206,10 @@ export class AppComponent {
         // 配置信息
       });
       wx.ready(function () {
-        //console.log("微信浏览器准备好了")
+        console.log("微信浏览器准备好了");
         audio.play();
+        console.log(audio);
+        console.log(audio.readyState);
         //alert(audio.src);
         //alert(audio.readyState);
       });
@@ -192,6 +225,8 @@ export class AppComponent {
         // 配置信息
       });
       wx.ready(function () {
+        console.log("点击暂停了");
+        console.log(audio.networkState);
         audio.pause();
       });
     }else{
