@@ -206,10 +206,10 @@ export class AppComponent {
         // 配置信息
       });
       wx.ready(function () {
-        console.log("微信浏览器准备好了");
+        //console.log("微信浏览器准备好了");
         audio.play();
-        console.log(audio);
-        console.log(audio.readyState);
+        //console.log(audio);
+        //console.log(audio.readyState);
         //alert(audio.src);
         //alert(audio.readyState);
       });
@@ -225,8 +225,8 @@ export class AppComponent {
         // 配置信息
       });
       wx.ready(function () {
-        console.log("点击暂停了");
-        console.log(audio.networkState);
+        //console.log("点击暂停了");
+        //console.log(audio.networkState);
         audio.pause();
       });
     }else{
